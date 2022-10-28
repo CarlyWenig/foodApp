@@ -1,0 +1,49 @@
+//
+//  AddEvent.swift
+//  foodApp
+//
+//  Created by Carly Wenig on 10/23/22.
+//
+
+import SwiftUI
+
+struct AddEvent: View {
+    @State var nameRest: String = ""
+    @State var description: String = ""
+    @State var time : String = ""
+    @State var contactinfo: String = ""
+    var body: some View {
+
+        Form {
+            Section {
+                TextField("Name of Restaurant", text: $nameRest)
+            }
+            
+            Section {
+                TextField("Small Description", text: $description)
+            }
+            Section {
+                TextField("Time", text: $time)
+            }
+            
+            Section {
+                TextField("Contact info", text: $contactinfo)
+            }
+        }
+        NavigationStack {
+            NavigationLink {
+                // destination view
+                AddEvent()
+            } label: {
+                Image(systemName: "paperplane.circle.fill")
+            }
+        }
+        .padding()
+        }
+    }
+
+struct AddEvent_Previews: PreviewProvider {
+    static var previews: some View {
+        AddEvent()
+    }
+}
