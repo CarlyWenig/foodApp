@@ -35,53 +35,33 @@ struct MainPage: View {
         VStack (alignment: .leading, spacing: 8) {
             NavigationStack {
                 NavigationLink {
+                    
                     // destination view
-                    AddEvent()
+                    AddEvent(events: $events)
                 } label: {
                     Image(systemName : "plus.circle")
                         .foregroundColor(.pink)
                 }
             }
             .frame(width: 350, height: 30, alignment: .topTrailing)
-
+            
             
             HStack {
                 List($events) {
                     $event in
-                    Button {
-                        // do something
-                    } label: {
-                        Image(systemName: "fork.knife")
-                            .foregroundColor(.pink)
-                    }
-                    
-                    Text(event.nameRest)
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Text(event.time)
-                        .font(.system(.caption, design: .monospaced, weight: .regular))
-                        .foregroundColor(.secondary)
-                    
-                    Text(event.description)
-                        .font(.headline)
-                    
-                    
-                    Text(event.contactinfo)
-                        .font(.headline)
-                    
-                    
+                    EventTimelineView(event: $event)
+                        .listRowSeparator(.hidden)
                 }
+                .listStyle(.plain)
             }
-        
-                
-            }
-  
+            
+            
         }
         
     }
     
+}
+
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
