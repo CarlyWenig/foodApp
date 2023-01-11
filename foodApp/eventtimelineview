@@ -1,0 +1,45 @@
+//
+//  EventTimelineView.swift
+//  foodApp
+//
+//  Created by Carly Wenig on 10/30/22.
+//
+
+import SwiftUI
+
+struct EventTimelineView: View {
+    @Binding var event: Event
+    
+    var body: some View {
+        Button {
+            // do something
+        } label: {
+            Image(systemName: "fork.knife")
+                .foregroundColor(.pink)
+        }
+        
+        Text(event.nameRest)
+            .font(.headline)
+        
+        
+        Text(event.time)
+            .font(.system(.caption, design: .monospaced, weight: .regular))
+            .foregroundColor(.secondary)
+        
+        Text(event.description)
+            .font(.headline)
+        
+        
+        Text(event.contactinfo)
+            .font(.headline)
+        
+        Divider()
+            .background(Color.pink)
+    }
+}
+
+struct EventTimelineView_Previews: PreviewProvider {
+    static var previews: some View {
+        EventTimelineView(event: .constant(Event(id: UUID(), nameRest: "d", description: "d", time: "d", contactinfo: "d")))
+    }
+}
