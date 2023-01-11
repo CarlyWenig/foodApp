@@ -8,42 +8,73 @@
 import SwiftUI
 
 struct AddEvent: View {
+    @Binding var events: [Event]
+    
     @State var nameRest: String = ""
     @State var description: String = ""
     @State var time : String = ""
     @State var contactinfo: String = ""
+    @State private var showAlert = false
+    
     var body: some View {
-
-        Form {
-            Section {
-                TextField("Name of Restaurant", text: $nameRest)
+        
+        VStack {
+            Form {
+                Section {
+                    TextField("Name of Restaurant", text: $nameRest)
+                }
+                
+                Section {
+                    TextField("Small Description", text: $description)
+                }
+                Section {
+                    TextField("Time", text: $time)
+                }
+                
+                Section {
+                    TextField("Contact info", text: $contactinfo)
+                }
+                
+                Button {
+                    events.append(Event(nameRest: nameRest, description: description, time: time, contactinfo: contactinfo))
+                    showAlert = true
+                    
+                    
+                    
+                } label : {
+                    
+                    (Text("Add Event"))
+                        .font(.system(size: 25, weight: .regular, design: .monospaced))
+                        .bold()
+                        .foregroundColor(.pink)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    
+                }
+                
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text(""),
+                          message: Text("event added"))
+                }
+                .padding()
+                
+                
+                
+                
+                // submit button
+                // action: events.append(Event(...))
             }
-            
-            Section {
-                TextField("Small Description", text: $description)
-            }
-            Section {
-                TextField("Time", text: $time)
-            }
-            
-            Section {
-                TextField("Contact info", text: $contactinfo)
-            }
-        }
-        NavigationStack {
-            NavigationLink {
-                // destination view
-                AddEvent()
-            } label: {
-                Image(systemName: "paperplane.circle.fill")
-            }
-        }
-        .padding()
         }
     }
+}
+        
+        
+    
+        
+
 
 struct AddEvent_Previews: PreviewProvider {
     static var previews: some View {
-        AddEvent()
+        AddEvent(events: .constant([]))
     }
 }
